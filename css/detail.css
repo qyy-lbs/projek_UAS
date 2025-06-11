@@ -1,0 +1,234 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  
+  
+}
+
+body{
+  background-color: #000000;
+  height: 100vh;
+  
+}
+
+
+
+header {
+  display: flex;
+  padding: 10px 25px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000000;
+  margin-bottom: 7px;
+}
+
+.judul {
+  height: 20px;
+  color: #ffffff;
+  background-color: #1528d6;
+  border-radius: 10px;
+  padding: 5px;
+  font-family: "Boldonse", sans-serif;
+  font-size: 15px;
+  padding-bottom: 10px;
+  text-shadow: 3px 3px 5px rgba(237, 232, 232, 0.5);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: #ffffff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 10px;
+}
+
+nav ul li a:hover {
+  background-color: transparent;
+  color: skyblue;
+  transition: color 0.3s ease-in-out;
+}
+
+
+
+
+
+/* FIM-LIHAT */
+
+.film-lihat{
+
+  position: absolute;
+  width: 100%;
+  top: 80px;
+  /* left: 5%;
+  right: 5%; */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  
+}
+
+
+
+.bi-heart-fill.text-danger {
+  color: red !important;
+}
+
+
+
+
+
+
+
+.film-lihat img{
+ width: 88%;
+ height: 240px;
+ object-fit:cover;
+ object-position: 30% 50%;
+ border-radius: 10px;
+ ;
+ 
+}
+
+
+.film-background{
+
+  position: relative;
+
+}
+
+
+.film-background img{
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;  
+  object-position: center;
+  filter:brightness(14%);
+  
+ 
+}
+
+
+.film-card{
+  position: absolute;
+ top: 350px;
+  left:78px;
+}
+.film-card img{
+  width: 14%;
+  height: 10%;
+  border-radius: 10px;
+  box-shadow: 0 0 0 0.5px rgba(237, 236, 236, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.film-card h1{
+  position: absolute;
+  top: 10px;
+  left: 200px;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 50px;
+}
+
+.film-card p{
+  position: absolute;
+  top: 70px;
+  left: 200px;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+footer {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  width:  auto;
+  height: 80px;
+  background-color: #6495ED;
+  color: #FFFFFF;
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.7), -4px -4px 7px rgba(0, 0, 0, 0.7);
+  
+}
+
+.icon-bar{
+  display: flex;
+  position: absolute;
+  top:200px;
+  left: 200px;
+  gap: 10px;
+}
+
+
+.icon-bar a {
+  text-decoration: none;
+
+}
+
+.icon {
+  background-color: #5d5e6063;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.icon i {
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+}
+
+.icon-bar a:hover{
+  background-color: #1528d6;
+}
+
+
+
+
+/* Iframe Trailer */
+.modal {
+  display: none; 
+  position: fixed; z-index: 999;
+  left: 10px; top: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  overflow: auto;
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 5px;
+  border-radius: 10px;
+  width: 860px; max-width: 90%;
+  position: relative;
+}
+.close {
+  position: absolute; top: 10px; right: 15px;
+  font-size: 28px; font-weight: bold;
+  cursor: pointer;
+  color: #aaa;
+}
+.close:hover {
+  color: black;
+}

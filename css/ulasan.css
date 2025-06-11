@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: blur(10px);
+    z-index: -2;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}
+
+header {
+    position: fixed;
+    padding: 10px 25px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.judul {
+    height: 60px;
+    color: white;
+    font-family: "Boldonse", sans-serif;
+    font-size: 30px;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 65px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px;
+}
+
+nav ul li a:hover {
+    background-color: transparent;
+    color: skyblue;
+    transition: color 0.3s ease-in-out;
+}
+
+.pencarian {
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    height: auto;
+    width: 56%;
+    background-color: #1111;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 40px rgba(0, 0, 0, 0.3), -1px -1px 40px rgba(0, 0, 0, 0.3);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rev-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#judul-film {
+    color: #fff;
+    padding-left: 25px;
+    text-transform: uppercase;
+    font-family: poppins, sans-serif;
+}
+
+
+label {
+    padding-right: 10px;
+    font-weight: bold;
+    color: white;
+    font-family: poppins, sans-serif;
+}
+
+select {
+    width: 425px;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#a {
+    padding-left: 25px;
+}
+
+.aspek {
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    font-family: sans-serif;
+    gap: 10px;
+}
+
+textarea {
+    width: 400px;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    resize: none;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+textarea::placeholder {
+    font-family: 'Poppins', sans-serif;
+}
+
+.rating, .aspek, .ulasan {
+    padding-left: 25px;
+}
+
+
+.button-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    font-family: 'Poppins', sans-serif;
+    width: 65px;
+    padding: 7px;
+    background-color: #c1b22a;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover{
+    background-color: #1e79db;
+}
+
+
+
