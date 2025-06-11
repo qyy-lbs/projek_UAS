@@ -38,12 +38,15 @@ $film = $result->fetch_assoc();
 </head>
 <body>
      <header>
-      <h1 class="judul">Amov</h1>
+      <a href="index.php"><i class="bi bi-arrow-left-circle" style="font-size: 1.5rem;"></i> </a>
       <nav>
         <ul>
           <li><a href="index.php">Home</a></li>
           <li><a href="about.php">Tentang kami</a></li>
-          <li><a href="profile.php"><i class="bi bi-person-circle">profil</i></a></li>
+          <a href="profile.php">
+          <img src="img/<?php echo $_SESSION['foto_profil']; ?>" alt="Profil" style="width:30px; height:30px; border-radius:50%;">
+          
+        </a>
         </ul>
       </nav>
     </header>
@@ -127,7 +130,11 @@ $is_favorit = $result->num_rows > 0;
 </form> 
 
 
-  <a href="ulasan.php" class="icon"><i class="bi bi-chat-left-dots"></i></a>
+
+<a href="ulasan.php?id=<?= $film['id'] ?>&title=<?= urlencode($film['judul']) ?>&poster=<?= urlencode($film['gambar']) ?>" class="icon"><i class="bi bi-chat-left-dots"></i></a>
+
+
+
   <a href="like.html" class="icon"><i class="bi bi-hand-thumbs-up"></i></a>
   <a href="dislike.html" class="icon"><i class="bi bi-hand-thumbs-down"></i></a>
 

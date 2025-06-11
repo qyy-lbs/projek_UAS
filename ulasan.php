@@ -1,89 +1,142 @@
+
+
+<?php
+session_start();
+$film_id = $_GET['id'];
+include 'connect.php';
+
+
+
+
+// Ambil info film
+$film_query = mysqli_query($conn, "SELECT * FROM film WHERE id = $film_id");
+$film = mysqli_fetch_assoc($film_query);
+
+// Ambil ulasan
+$query = "SELECT review.*, user.nama 
+          FROM review 
+          JOIN user ON review.user_id = user.id 
+          WHERE film_id = $film_id 
+          ORDER BY created_at DESC";
+$result = mysqli_query($conn, $query);
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMov - Ulasan</title>
-    <script>
-        function tampilkanDetailFilm() {
-            const params = new URLSearchParams(window.location.search);
-            const title = params.get("title") || "Judul Tidak Diketahui";
-            const poster = params.get("poster");
-
-            document.getElementById("judul-film").innerText = title;
-
-            if (poster) {
-                const img = document.createElement("img");
-                img.src = poster;
-                img.alt = "Poster " + title;
-                img.width = 200;
-                document.getElementById("poster-film").appendChild(img);
-                
-                document.body.style.backgroundImage = `url(${poster})`;
-                document.body.style.backgroundSize = "cover";
-                document.body.style.backgroundPosition = "center";
-                document.body.style.backgroundRepeat = "no-repeat";
-            }
+    <title>Ulasan Film - <?= htmlspecialchars($film['judul']) ?></title>
+    <style>
+        body {
+            background-color:rgb(36, 34, 34);
+            color: white;
+            font-family: sans-serif;
         }
-    </script>
-    <link rel="stylesheet" href="css/ulasan.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil:opsz,wght@10..72,100..900&family=Boldonse&display=swap" rel="stylesheet">
+
+        .container {
+            max-width: 1000px;
+            /* margin: auto; */
+            padding: 30px;
+            display: flex;
+        }
+
+        .form-ulasan {
+            background-color:rgba(54, 54, 57, 0.51);
+            padding:0 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+           
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background-color:rgb(16, 12, 114);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .ulasan-item {
+            background-color: #444;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .rating {
+            color: gold;
+        }
+
+        .film-info {
+          
+            margin-bottom: 30px;
+        }
+
+        .film-info img {
+            max-width: 200px;
+            margin-right: 30px;   
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        h3 {
+            text-align: center;
+        }
+    </style>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"> 
 </head>
-<body onload="tampilkanDetailFilm()">
-    <header>
-        <h1 class="judul">Amov</h1>
+<body>
 
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="index.php">Review</a></li>
-                <li><a href="index.php">Contact</a></li>
-            </ul>
-            <input class="pencarian" type="text" placeholder="Search......">
-        </nav>
-    </header>
+<a href="index.php"><i class="bi bi-arrow-left-circle" style="font-size: 1.5rem; margin-left: 30px; color: white;"></i> </a>
 
-    <div class="container">
-        <div id="poster-film"></div>
 
-        <div class="rev-container">
-            <h3 id="judul-film"></h3>
-            
-            <form action="index.php" method="get">
-                <div class="rating">
-                    <label>Rating:</label>
-                    <select name="rating" id="rating" required>
-                        <option value="1">⭐</option>
-                        <option value="2">⭐⭐</option>
-                        <option value="3">⭐⭐⭐</option>
-                        <option value="4">⭐⭐⭐⭐</option>
-                        <option value="5">⭐⭐⭐⭐⭐</option>
-                    </select>
-                </div>
-
-                
-                <label id="a">Aspek Disukai:</label>
-                <div class="aspek">    
-                    <input type="checkbox" name="aspek" value="Alur"> Alur Cerita 
-                    <input type="checkbox" name="aspek" value="Akting"> Akting
-                    <input type="checkbox" name="aspek" value="Sinematografi"> Sinematografi 
-                    <input type="checkbox" name="aspek" value="Soundtrack"> Soundtrack 
-                </div>
-            
-
-                <div class="ulasan">
-                    <label>Ulasan:</label> <br>
-                    <textarea rows="4" cols="50" placeholder="Tulis ulasanmu di sini..." required></textarea>
-                </div>
-                
-                <div class="button-wrap">
-                    <button type="submit" value="kirim">Kirim</button>
-                </div>
-            </form>
-        </div>
+<div class="container">
+    <div class="film-info">
+     
+        <img src="img/<?= htmlspecialchars($film['gambar']) ?>" alt="<?= htmlspecialchars($film['judul']) ?>">
     </div>
-        
+
+
+
+    <form action="simpan_ulasan.php" method="POST" class="form-ulasan">
+    <input type="hidden" name="film_id" value="<?= $film_id ?>">
+    <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>"> 
+    
+
+        <input type="hidden" name="film_id" value="<?= $film_id ?>">
+           <h2><?= htmlspecialchars($film['judul']) ?></h2>
+        <label>Rating:</label>
+        <select name="rating" required>
+            <option value="">Pilih rating</option>
+            <?php for ($i = 1; $i <= 5; $i++): ?>
+                <option value="<?= $i ?>"><?= str_repeat("⭐", $i) ?></option>
+            <?php endfor; ?>
+        </select>
+
+        <label>Ulasan:</label>
+        <textarea name="ulasan" rows="4" placeholder="Tulis ulasan..." required></textarea>
+
+        <button class="btn" type="submit">Kirim Ulasan</button>
+    </form>
+    </div>
+
+    <h3>Ulasan Pengguna</h3>
+    <?php while($row = mysqli_fetch_assoc($result)): ?>
+        <div class="ulasan-item">
+            <strong><?= htmlspecialchars($row['nama']) ?></strong><br>
+            <span class="rating"><?= str_repeat("⭐", $row['rating']) ?></span><br>
+            <p><?= nl2br(htmlspecialchars($row['ulasan'])) ?></p>
+            <small>Ditulis pada <?= $row['created_at'] ?></small>
+        </div>
+    <?php endwhile; ?>
+
 </body>
 </html>

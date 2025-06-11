@@ -1,7 +1,6 @@
 <?php
 include 'connect.php';
 include 'controller.php';
-
 session_start();
 ?>
 

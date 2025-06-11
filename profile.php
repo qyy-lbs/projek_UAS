@@ -19,7 +19,7 @@ $review = getReviewByUser($_SESSION['user_id']);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Profil - <?= htmlspecialchars($user['nama_lengkap']) ?></title>
+        <title>Profil - <?= htmlspecialchars($user['nama']) ?></title>
 
     <link rel="stylesheet" href="css/profile.css?v=3" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -74,7 +74,7 @@ $review = getReviewByUser($_SESSION['user_id']);
 
 
 $user_id = $_SESSION['user_id'];
-$query = "SELECT film.judul, film.gambar_detail 
+$query = "SELECT film.judul, film.gambar_detail, film.id
           FROM favorit 
           JOIN film ON favorit.film_id = film.id 
           WHERE favorit.user_id = ?";
@@ -86,7 +86,7 @@ if ($stmt) {
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
-    die("Query gagal: " . $conn->error); // DEBUG: tampilkan error SQL jika gagal
+    die("Query gagal: " . $conn->error); 
 }
 ?>
 
@@ -94,8 +94,8 @@ if ($stmt) {
         
 <?php while ($row = $result->fetch_assoc()) : ?>
 
-    <img src="img/<?= htmlspecialchars($row['gambar_detail']) ?>" alt="<?= htmlspecialchars($row['judul']) ?>" >
- 
+    <a href="detail.php?id=<?= urlencode($row['id']) ?>" > <img src="img/<?= htmlspecialchars($row['gambar_detail']) ?>" alt="<?= htmlspecialchars($row['judul']) ?>" > </a> 
+
 
 <?php endwhile; ?>
 </div>
